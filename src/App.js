@@ -47,24 +47,20 @@ function App() {
   // console.log(data[0]?.N_name);
 
   return (
-    <div className="md:max-w-2xl lg:max-w-5xl mx-auto">
+    <div className="md:max-w-2xl lg:max-w-4xl mx-auto my-12">
       <div className="flex items-center justify-center m-6 text-white text-4xl font-extrabold uppercase">
         <AiOutlineStock className="mr-2 text-5xl" />
         <p>Stock</p>
       </div>
-      {/* <img
-        className="mx-auto w-[250px]"
-        src="https://www.stockradars.co/images/Logo_StockRadars.png"
-        alt="logo"
-      /> */}
       {data.length > 0 &&
         data.map((item, index) => {
           return (
             <div
-              className="m-3 py-3 px-6 bg-gradient-to-tr from-[#3ca2da] to-[#97d4ff] rounded-2xl shadow-xl text-white"
+              className="m-3 py-3 px-5 bg-gradient-to-tr from-[#42ade6] to-[#acdcff] rounded-2xl shadow-xl text-white"
               key={index}
             >
-              <div className="grid grid-cols-3">
+              <div className="grid grid-cols-3 lg:grid-cols-4 lg:items-center">
+                {/* NAME */}
                 <div className="m-1 col-span-2">
                   <p className="text-3xl font-extrabold">{item.N_name}</p>
                   <p className="text-white text-[13px] font-semibold">
@@ -72,10 +68,11 @@ function App() {
                   </p>
                 </div>
 
+                {/* MARKET CAP */}
                 <div className="m-1 col-span-1">
                   <div>
                     <p className="flex items-center">
-                      <BsFillTriangleFill className="mr-2 text-sm" />
+                      <BsFillTriangleFill className="mr-[6px] text-xs flex-shrink-0" />
                       <span className="text-3xl font-extrabold">
                         {(item.marketcap / 1000000000).toFixed(2)}
                       </span>
@@ -89,26 +86,20 @@ function App() {
                     Market cap
                   </p>
                 </div>
-              </div>
 
-              <div className="flex text-[#ffffff] text-sm font-semibold uppercase">
-                <p
-                  className="flex items-center m-1 w-fit text-[#ffffff] text-sm font-semibold uppercase hover:scale-105 bg-gradient-to-tr from-[#1c3854] to-[#3e8ad1] rounded-md px-3 py-1 shadow-md hover:shadow-lg cursor-pointer"
-                  // className="flex items-center m-1 hover:scale-105 bg-gradient-to-tr from-[#e1ab06] to-[#FACC15] rounded-md px-3 py-1 shadow-md hover:shadow-lg cursor-pointer"
-                  onClick={() => {
-                    showModal(item);
-                  }}
-                >
-                  <BsBuildings className="mr-1" />
-                  company profile
-                </p>
-                {/* <a
-                  className="flex items-center m-1 hover:scale-105 bg-gradient-to-tr from-[#1d446a] to-[#3883c8] rounded-md px-3 py-1 shadow-md hover:shadow-lg cursor-pointer"
-                  href={item.N_URL}
-                >
-                  <BsGlobe className="mr-1" />
-                  website
-                </a> */}
+                {/* COMPANY PROFILE LINK */}
+                <div className="col-span-3 lg:col-span-1 flex text-[#ffffff] text-sm font-semibold uppercase">
+                  <p
+                    className="flex items-center m-1 w-fit text-[#ffffff] text-sm font-semibold uppercase hover:scale-105 bg-gradient-to-tr from-[#1c3854] to-[#3e8ad1] rounded-md px-3 py-1 h-[40px] shadow-md hover:shadow-lg cursor-pointer"
+                    // className="flex items-center m-1 hover:scale-105 bg-gradient-to-tr from-[#e1ab06] to-[#FACC15] rounded-md px-3 py-1 shadow-md hover:shadow-lg cursor-pointer"
+                    onClick={() => {
+                      showModal(item);
+                    }}
+                  >
+                    <BsBuildings className="mr-1" />
+                    company profile
+                  </p>
+                </div>
               </div>
 
               <Modal
@@ -124,14 +115,7 @@ function App() {
                   {modalData.company}
                 </p>
                 <p className="mb-3">{modalData.profile}</p>
-                {/* <p
-                  // className="flex items-center w-fit text-[#ffffff] text-sm font-semibold uppercase hover:scale-105 bg-gradient-to-tr from-[#1d446a] to-[#3883c8] rounded-md px-3 py-1 shadow-md hover:shadow-lg cursor-pointer"
-                  className="flex items-center text-blue-500 hover:text-blue-600 font-medium uppercase cursor-pointer"
-                  onClick={onHandleClickWebsite}
-                >
-                  <BsGlobe className="mr-1" />
-                  website
-                </p> */}
+
                 <a
                   // className="flex items-center w-fit text-[#ffffff] text-sm font-semibold uppercase hover:scale-105 bg-gradient-to-tr from-[#1d446a] to-[#3883c8] rounded-md px-3 py-1 shadow-md hover:shadow-lg cursor-pointer"
                   className="flex items-center text-blue-500 hover:text-blue-600 font-medium uppercase cursor-pointer"
