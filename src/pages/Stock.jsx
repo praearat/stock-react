@@ -1,33 +1,16 @@
-import "./App.css";
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
 import { BsGlobe, BsFillTriangleFill, BsBuildings } from "react-icons/bs";
 import { AiOutlineStock } from "react-icons/ai";
+import { useNavigate } from "react-router";
 
-function App() {
+const Stock = () => {
   const [data, setData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState({});
+  const navigate = useNavigate();
 
-  const showModal = (item) => {
-    setModalData({
-      name: item.N_name,
-      company: item.N_COMPANY_E,
-      profile: item.N_BUSINESS_TYPE_E,
-      website: item.N_URL,
-    });
-    setIsModalOpen(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
-  // const onHandleClickWebsite = (event) => {
-  //   event.preventDefault();
-  //   window.location.href = modalData.website;
-  // };
-
+  ////////// FETCH DATA //////////
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -44,14 +27,45 @@ function App() {
     fetchData();
   }, []);
 
-  // console.log(data[0]?.N_name);
+  ////////// HANDLE MODAL //////////
+  const showModal = (item) => {
+    setModalData({
+      name: item.N_name,
+      company: item.N_COMPANY_E,
+      profile: item.N_BUSINESS_TYPE_E,
+      website: item.N_URL,
+    });
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  ////////// HANDLE CLICK REGISTRATION FORM //////////
+  const handleClickForm = () => {
+    navigate("/registration-form");
+  };
 
   return (
     <div className="md:max-w-2xl lg:max-w-4xl mx-auto my-12">
+      {/* HEADLINE */}
       <div className="flex items-center justify-center m-6 text-white text-4xl font-extrabold uppercase">
         <AiOutlineStock className="mr-2 text-5xl" />
         <p>Stock</p>
       </div>
+
+      {/* REGISTRATION FORM */}
+      <div className="flex justify-center">
+        <button
+          className="max-w-sm mb-3 bg-[#727b81] px-6 py-2 rounded-full border-2 border-white text-white font-semibold shadow-md hover:shadow-lg hover:bg-[#929a9f] focus:bg-[#a8b0b5]"
+          onClick={handleClickForm}
+        >
+          Registration Form
+        </button>
+      </div>
+
+      {/* DATA */}
       {data.length > 0 &&
         data.map((item, index) => {
           return (
@@ -71,12 +85,18 @@ function App() {
                 {/* MARKET CAP */}
                 <div className="m-1 col-span-1">
                   <div>
-                    <p className="flex items-center">
+                    <div className="flex items-center">
                       <BsFillTriangleFill className="mr-[6px] text-xs flex-shrink-0" />
-                      <span className="text-3xl font-extrabold">
-                        {(item.marketcap / 1000000000).toFixed(2)}
-                      </span>
-                    </p>
+                      {item.marketcap ? (
+                        <p className="text-3xl font-extrabold">
+                          {(item.marketcap / 1000000000).toFixed(2)}
+                        </p>
+                      ) : (
+                        <span className="text-[#d9eeff] text-lg font-bold uppercase">
+                          No data
+                        </span>
+                      )}
+                    </div>
                     <p className="-mt-1">
                       <span className="mr-1 font-medium">billion</span>
                       <span className="text-sm font-medium">THB</span>
@@ -135,6 +155,6 @@ function App() {
       <div></div>
     </div>
   );
-}
+};
 
-export default App;
+export default Stock;
