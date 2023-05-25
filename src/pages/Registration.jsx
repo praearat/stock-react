@@ -1,54 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import InputList from "../components/InputList";
 
 const Registration = () => {
+  const [inputData, setInputData] = useState({});
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    setInputData({
+      firstName: urlParams.get("firstName"),
+      lastName: urlParams.get("lastName"),
+      phoneNo: urlParams.get("phoneNo"),
+      email: urlParams.get("email"),
+      ref: urlParams.get("ref"),
+    });
+  }, []);
+
+  console.log("inputData =", inputData);
+
   return (
-    <div className="md:max-w-2xl lg:max-w-4xl mx-auto my-12">
+    <div className="min-h-screen md:max-w-2xl lg:max-w-4xl mx-auto my-12">
       {/* HEADLINE */}
-      <h1 className="text-center text-white text-4xl font-extrabold uppercase">
+      <h1 className="mb-6 text-center text-white text-4xl font-extrabold uppercase">
         Register
       </h1>
 
       {/* FROM */}
-      <div className="grid grid-cols-6 m-6 items-center space-y-3">
-        <p className="text-right mr-5 text-white font-medium col-span-2">
-          First Name :
-        </p>
-        <input
-          className="px-5 py-2 rounded-md col-span-4"
-          type="text"
-          placeholder="First Name"
+      <div className="m-4">
+        <InputList
+          label="First Name"
+          placeholder="Input first name"
+          value={inputData.firstName}
         />
-        <p className="text-right mr-5 text-white font-medium col-span-2">
-          Last Name :
-        </p>
-        <input
-          className="px-5 py-2 rounded-md col-span-4"
-          type="text"
-          placeholder="Last Name"
+        <InputList
+          label="Last Name"
+          placeholder="Input last name"
+          value={inputData.lastName}
         />
-        <p className="text-right mr-5 text-white font-medium col-span-2">
-          Phone No :
-        </p>
-        <input
-          className="px-5 py-2 rounded-md col-span-4"
-          type="text"
-          placeholder="Phone Number"
+        <InputList
+          label="Phone No"
+          placeholder="Input phone number"
+          value={inputData.phoneNo}
         />
-        <p className="text-right mr-5 text-white font-medium col-span-2">
-          Email :
-        </p>
-        <input
-          className="px-5 py-2 rounded-md col-span-4"
-          type="text"
-          placeholder="Email Address"
+        <InputList
+          label="Email"
+          placeholder="Input email address"
+          value={inputData.email}
         />
-        <p className="text-right mr-5 text-white font-medium col-span-2">
-          Ref :
-        </p>
-        <input
-          className="px-5 py-2 rounded-md col-span-4"
-          type="text"
-          placeholder="Reference"
+        <InputList
+          label="Ref"
+          placeholder="Input reference"
+          value={inputData.ref}
         />
       </div>
     </div>
