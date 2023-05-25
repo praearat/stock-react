@@ -57,7 +57,7 @@ const Registration = () => {
   console.log("inputData =", inputData);
 
   return (
-    <div className="min-h-screen md:max-w-2xl lg:max-w-4xl mx-auto my-12">
+    <div className="min-h-screen max-w-2xl mx-auto my-12">
       {/* HEADLINE */}
       <h1 className="mb-6 text-center text-white text-4xl font-extrabold uppercase">
         Register

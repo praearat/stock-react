@@ -1,6 +1,7 @@
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
-import { BsGlobe, BsFillTriangleFill, BsBuildings } from "react-icons/bs";
+import { BsGlobe, BsBuildings } from "react-icons/bs";
+import { RxTriangleDown, RxTriangleUp } from "react-icons/rx";
 import { AiOutlineStock } from "react-icons/ai";
 import { useNavigate } from "react-router";
 
@@ -68,6 +69,8 @@ const Stock = () => {
       {/* DATA */}
       {data.length > 0 &&
         data.map((item, index) => {
+          const random = Math.floor(Math.random() * 2);
+
           return (
             <div
               className="m-3 py-3 px-5 bg-gradient-to-tr from-[#42ade6] to-[#acdcff] rounded-2xl shadow-xl text-white"
@@ -86,11 +89,22 @@ const Stock = () => {
                 <div className="m-1 col-span-1">
                   <div>
                     <div className="flex items-center">
-                      <BsFillTriangleFill className="mr-[6px] text-xs flex-shrink-0" />
                       {item.marketcap ? (
-                        <p className="text-3xl font-extrabold">
-                          {(item.marketcap / 1000000000).toFixed(2)}
-                        </p>
+                        <>
+                          {random === 1 ? (
+                            <RxTriangleUp className="-ml-4 -mr-1 text-green-700 text-3xl flex-shrink-0" />
+                          ) : (
+                            <RxTriangleDown className="-ml-4 -mr-1 text-red-600 text-3xl flex-shrink-0" />
+                          )}
+
+                          <p
+                            className={`${
+                              random === 1 ? "text-[#319c48]" : "text-[#dc4646]"
+                            } text-3xl font-extrabold`}
+                          >
+                            {(item.marketcap / 1000000000).toFixed(2)}
+                          </p>
+                        </>
                       ) : (
                         <span className="text-[#d9eeff] text-lg font-bold uppercase">
                           No data
